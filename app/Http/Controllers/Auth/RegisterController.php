@@ -66,11 +66,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $image=$data['image']->store('public/profile');
+        $cover=$data['cover']->store('public/cover');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'dp' => $image
+            'dp' => $image,
+            'coverPic'=>$cover
         ]);
     }
 }
