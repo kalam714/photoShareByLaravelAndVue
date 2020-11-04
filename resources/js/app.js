@@ -21,6 +21,7 @@ window.Vue = require('vue');
 Vue.component('album', require('./components/AlbumComponent.vue').default);
 Vue.component('index', require('./components/IndexComponent.vue').default);
 Vue.component('edit', require('./components/EditComponent.vue').default);
+Vue.component('uplaod', require('./components/UploadComponent.vue').default);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**

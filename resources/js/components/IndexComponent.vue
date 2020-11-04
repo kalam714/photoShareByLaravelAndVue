@@ -8,6 +8,8 @@
                     <th scope="col">Category</th>
                      <th scope="col">Image</th>
                       <th scope="col">Decription</th>
+                      <th scope="col">Upload</th>
+                      <th scope="col">View</th>
                       <th scope="col">Edit</th>
                       <th scope="col">Delete</th>
               </tr>
@@ -19,6 +21,16 @@
                   <td>{{album.category.name}}</td>
                   <td class="w-25"><img :src="'/album/'+album.image" class="img-fluid img-thumbnail"></td>
                   <td>{{album.description}}</td>
+                     <td>
+                     <a :href="'/create/image/'+album.id"> <button  type="button" class="btn btn-secondary">
+                           Upload
+                    </button></a>
+                  </td>
+                       <td>
+                     <a :href="'/albums/'+album.slug+'/'+album.id"> <button  type="button" class="btn btn-dark">
+                           view
+                    </button></a>
+                  </td>
                   <td>
                       <button @click.prevent="edit(album.id)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                             Edit

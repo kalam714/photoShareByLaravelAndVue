@@ -30,3 +30,12 @@ Route::post('/albums/store', [App\Http\Controllers\AlbumController::class, 'stor
 Route::put('/albums/{id}/update', [App\Http\Controllers\AlbumController::class, 'updateAlbum'])->middleware('auth');
 Route::delete('/albums/delete/{id}', [App\Http\Controllers\AlbumController::class, 'deleteAlbum'])->middleware('auth');
 
+
+Route::get('/create/image/{id}', [App\Http\Controllers\GalleryController::class, 'createImage'])->middleware('auth');
+
+Route::post('/upload/image', [App\Http\Controllers\GalleryController::class, 'uploadImage'])->middleware('auth');
+Route::get('/get/images', [App\Http\Controllers\GalleryController::class, 'getImages'])->middleware('auth');
+Route::delete('/deleteImage/{id}', [App\Http\Controllers\GalleryController::class, 'deleteImage'])->middleware('auth');
+Route::get('/albums/{slug}/{id}', [App\Http\Controllers\GalleryController::class, 'viewAlbumImages'])->middleware('auth');
+
+
