@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -36,6 +33,15 @@ Route::get('/create/image/{id}', [App\Http\Controllers\GalleryController::class,
 Route::post('/upload/image', [App\Http\Controllers\GalleryController::class, 'uploadImage'])->middleware('auth');
 Route::get('/get/images', [App\Http\Controllers\GalleryController::class, 'getImages'])->middleware('auth');
 Route::delete('/deleteImage/{id}', [App\Http\Controllers\GalleryController::class, 'deleteImage'])->middleware('auth');
-Route::get('/albums/{slug}/{id}', [App\Http\Controllers\GalleryController::class, 'viewAlbumImages'])->middleware('auth');
+Route::get('/albums/{slug}/{id}', [App\Http\Controllers\GalleryController::class, 'viewAlbumImages'])->name('album.image');
 
+Route::get('/', [App\Http\Controllers\IndexController::class, 'index']);
+Route::get('/userProfile/{id}', [App\Http\Controllers\IndexController::class, 'userAlbums'])->name('user.album');
+Route::post('/follow', [App\Http\Controllers\FollowController::class, 'followAndUnfollow']);
+route::get('/profile', [App\Http\Controllers\FollowController::class, 'profile'])->name('profile');
+
+Route::get('/profilePic/{id}',[App\Http\Controllers\FollowController::class, 'userProfilePic'])->name('user.profile')->middleware('auth');
+Route::post('/profilePic/update',[App\Http\Controllers\FollowController::class, 'userProfilePicUpdate'])->name('user.update.profile')->middleware('auth');
+Route::get('/coverPic/{id}',[App\Http\Controllers\FollowController::class, 'userCoverPic'])->middleware('auth');
+Route::post('/coverPic/update',[App\Http\Controllers\FollowController::class, 'userCoverPicUpdate'])->middleware('auth');
 

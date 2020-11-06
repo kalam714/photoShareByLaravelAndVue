@@ -37,8 +37,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                    <a class="navbar-brand" href="{{url('/albums')}}">My Albums
+                    @if(Auth::check())
+                    <a class="navbar-brand" href="{{route('user.album',[auth()->user()->id])}}">My Albums
                     </a>
+                    <a class="navbar-brand" href="{{url('/albums')}}">Dashboard
+                    </a>
+                    @endif
 
                     </ul>
 
@@ -58,9 +62,15 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                    <img src="{{Storage::url(auth()->user()->dp)}}" width="35px" >
+                                   <span class="caret"></span>
+                                   {{Auth()->user()->name}}
                                 </a>
+                               
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('profile')}}">Profile
+                                  
+                                  </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

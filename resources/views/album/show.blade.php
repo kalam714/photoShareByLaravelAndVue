@@ -26,13 +26,20 @@
                 <div class="col-md-12">
                 <div class="card-body">
                 @foreach($albums as $album)
+                @if(Auth::check() && auth()->user()->id !=$userId)
+                <follow userId="{{$userId}}" follows="{{$follows}}"></follow>
+                @endif
                 <h3><storng>{{$album->name}}</strong></h3>
+               <p> <storng>Create By</strong>
+               <a href="{{route('user.album',[$album->user_id])}}">{{$album->user->name}}</a>
+               </p>
                 <p>{{$album->description}}</p>
 
                 @endforeach
 
                 </div>
-                <div id="disqus_thread"></div>
+                
+                <div id="disqus_thread">
 <script>
 
 /**
