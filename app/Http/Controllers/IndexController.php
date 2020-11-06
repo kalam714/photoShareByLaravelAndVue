@@ -25,5 +25,10 @@ class IndexController extends Controller
 
         return view('userAlbum',compact('albums'));
     }
+    public function userAlbumsByCategory($id){
+       $albums=Album::where('category_id',$id)->get();
+       return view('albumCategory',compact('albums'));
+    }
+
 
 }

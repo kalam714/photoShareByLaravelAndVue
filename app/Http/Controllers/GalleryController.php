@@ -37,6 +37,7 @@ class GalleryController extends Controller
     }
     public function deleteImage($id){
         $image=Photo::find($id);
+        unlink(public_path('/images/'.$image->image));
         $image->delete();
     }
     public function viewAlbumImages($slug,$id){

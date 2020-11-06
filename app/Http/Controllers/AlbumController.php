@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\AlbumResource;
 
 use Illuminate\Support\Str;
 use App\Models\Album;
+use App\Models\Photo;
 
 class AlbumController extends Controller
 {
@@ -38,8 +40,8 @@ class AlbumController extends Controller
        return view('album.index');
    }
    public function getAlbums(){
-       $albums=Album::with('category')->where('user_id',auth()->user()->id)->get();
-       return $albums;
+     
+       return new AlbumResource(Album::with('category')->where('user_id',auth()->user()->id)->paginate(2));
    }
    public function getAlbum($id){
        return Album::with('category')->find($id);
@@ -63,8 +65,15 @@ class AlbumController extends Controller
        }
    }
    public function deleteAlbum($id){
-       $album=Album::find($id)->delete();
+       $album=Album::find($id);
+       unlink(public_path('/album/'.$album->image));
+       $album->delete();
        if($album){
+           $photos=Photo::where('album_id',$id)->get();
+           foreach($photos as $photo){
+            unlink(public_path('/images/'.$photo->image));
+           }
+           Photo::where('album_id',$id)->delete();
         return response()->json($this->getAlbums());
     }
 

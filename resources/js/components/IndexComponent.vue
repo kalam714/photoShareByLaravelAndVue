@@ -46,6 +46,7 @@
           </tbody>
 
       </table>
+      <paginate :meta="meta" v-on:pagination="getAlbums"></paginate>
       <edit :editrecord="records" @recordUpdate="recordUpdate"></edit>
       
     </div>
@@ -55,19 +56,26 @@ export default {
     data(){
         return{
             albums:[],
-            records:[]
+            records:[],
+            meta:{}
         }
     },
     created(){
-        axios.get('/getalbums')
+        this.getAlbums()
+    },
+    methods:{
+        getAlbums(page){
+            axios.get('/getalbums',{params:{page}})
         .then((response)=>{
-             this.albums=response.data
+             this.albums=response.data.data
+             this.meta=response.data.meta
         })
         .catch((error)=>{
             console.log(error)
         })
-    },
-    methods:{
+
+        },
+
         edit(id){
             axios.get('/api/albums/'+id)
             .then((response)=>{

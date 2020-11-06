@@ -44,6 +44,23 @@
                     </a>
                     @endif
 
+                    <li class="nav-item dropdown">
+                                <a id="navbarDropdown"  href="#" role="button" 
+                                data-toggle="dropdown"  class="navbar-brand" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <span class="caret"></span>
+                                   Categories
+                                </a>
+                               
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                @foreach(App\Models\Category::all() as $category)
+                                <a class="dropdown-item" href="category/{{$category->id}}"> {{$category->name}}
+                                  
+                                  </a>
+                                   @endforeach
+                                </div>
+                            </li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

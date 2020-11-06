@@ -37,6 +37,7 @@ Route::get('/albums/{slug}/{id}', [App\Http\Controllers\GalleryController::class
 
 Route::get('/', [App\Http\Controllers\IndexController::class, 'index']);
 Route::get('/userProfile/{id}', [App\Http\Controllers\IndexController::class, 'userAlbums'])->name('user.album');
+Route::get('/category/{id}', [App\Http\Controllers\IndexController::class, 'userAlbumsByCategory'])->name('user.album.category');
 Route::post('/follow', [App\Http\Controllers\FollowController::class, 'followAndUnfollow']);
 route::get('/profile', [App\Http\Controllers\FollowController::class, 'profile'])->name('profile');
 
